@@ -8,7 +8,7 @@ const getAllProducts = async () => {
 }
 
 const getProductById = async (id) => {
-    const product = await db.products.findOne({_id: ObjectId(id)});
+    const product = await db.products.findOne({_id: new ObjectId(id)});
     return product;
 }
 
