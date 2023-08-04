@@ -1,12 +1,14 @@
 const express = require('express');
+
 const productRoutes = require('./router/productRoutes');
-const dotenv = require("dotenv").config();
+const orderRoutes = require('./router/orderRoutes');
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
