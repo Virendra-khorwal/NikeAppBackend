@@ -8,7 +8,9 @@ const client = new MongoClient(uri)
 
 const database = client.db('Nikedata')
 const products = database.collection('products')
+const orders = database.collection('orders')
 
 module.exports = {
-    products
+    products,
+    orders,
 }

@@ -1,15 +1,25 @@
 
 const express = require('express');
+const {createOrder, getOrder}  = require('../database/orders');
 const router = express.Router();
 
 
 
 router.get('/:reference', async(req, res) => {
-    res.send(`Get order with reference ${req.params.reference}`);
+    const order = await getOrder(req.params.reference);
+
+    if(!order) {
+        res.status(404).send({status: 'Failed', message: 'Order not found'});
+        return;
+    }
+    res.status(200).send({status: 'OK', data: order});
 })
 
 router.post('/', async(req, res) => {
-    res.send(`Create order`);
+    const orderData = req.body;
+    orderData.ref = (Math.random() +1 ).toString(36).substring(7);
+    const newOrder = await createOrder(orderData);
+    res.status(201).send({status: 'OK', data: newOrder});
 })
 
 module.exports = router;
